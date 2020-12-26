@@ -7,16 +7,23 @@ import View from './view';
 const view = new View();
 const api = new Api();
 
-const items = [];
-
 view.viewInit();
-view.drawLoader();
 
-api.makeRequest('https://gitcdn.link/repo/netology-code/ajs-task/master/netology.json')
-    .then(response => {
-        console.log(response);
-        if(response && response.data && response.data.length) {
-            setTimeout(() => view.drawItems(response.data), 1500);
+async function initItems() {
+    try {
+        view.drawLoader();
+        let response = await api.makeRequest('https://gitcdn.link/repo/netology-code/ajs-task/master/netology.json'); console.log(response);
+        if (response && response.data && response.data.length) {
+            // setTimeout для того, чтобы посмотреть лоадер
+            setTimeout(() => view.drawItems(response.data), 1000);
+        } else {
+            view.drawEmpty();
         }
-    })
-    .catch(err => console.log(err));
+    }
+    catch (err) {
+        console.log(err);
+        view.drawError();
+    }
+}
+
+initItems();
