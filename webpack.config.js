@@ -1,18 +1,27 @@
 const path = require('path');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {
     CleanWebpackPlugin
 } = require('clean-webpack-plugin');
+const miniCss = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: './src/js/index.js',
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'dist', 'js'),
         libraryExport: 'default'
     },
-
+    module: {
+        rules: [{
+            test: /\.(s*)css$/,
+            use: [
+                miniCss.loader,
+                'css-loader',
+                'sass-loader',
+            ]
+        }]
+    },
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
@@ -20,6 +29,9 @@ module.exports = {
             path: path.resolve(__dirname, 'dist'),
             filename: './index.html',
             inject: 'body'
-        })
+        }),
+        new miniCss({
+            filename: 'style.css'
+        }),
     ]
-}
+};
