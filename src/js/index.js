@@ -5,10 +5,8 @@ import Api from "./api";
 import View from './view';
 import '../scss/style.scss';
 
-
 const view = new View();
 const api = new Api();
-
 
 view.viewInit();
 
