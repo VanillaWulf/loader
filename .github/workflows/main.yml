@@ -21,7 +21,7 @@ jobs:
         id: deployment
         with:
           token: "${{ github.token }}"
-          target_url: http://app-loader.com
+          target_url: https://vanillawulf.github.io/loader/
           environment: production
         # more steps below where you run your deployment scripts inside the same action:
   
