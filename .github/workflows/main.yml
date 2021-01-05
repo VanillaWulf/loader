@@ -7,18 +7,22 @@ on:
 
 jobs:
   deploy:
-    name: loader-deploy
-
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        node-version: [12.x]
     steps:
-      - uses: actions/checkout@v1
-
-      - uses: chrnorm/deployment-action@releases/v1
-        name: Create GitHub deployment
-        id: deployment
-        with:
-          token: "${{ github.token }}"
-          target_url: https://vanillawulf.github.io/loader/
-          environment: production
-        # more steps below where you run your deployment scripts inside the same action:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install Packages
+      run: npm install
+    - name: Build page
+      run: npm run-script build
+    - name: Deploy to gh-pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        deploy_key: ${{ secrets.AAAAB3NzaC1yc2EAAAADAQABAAABAQD1cDEtWNhWT7NXvSwuY+/gv2c3umFORYXsWfChIU5XlgkgiyVgSKomLxLefVRWnaVB8Dseb53/Xf2D3Y6iZgggI5DwZT3N1kDvnE2VLUDK7RSlCeUsgmc58h9bqC+t6lTBzjc15zCGGBikgYllTI8UNf1oJPOzHDxr1wRssphD41gMEpyfjXHt6W+L31vLR1Qdo8NNsWVHdHbSLdYHiTRsOj4yABYOMg9Tw+pgieJBr9OWqNwSmTee6z3jHiafZs90NI1cYZAxPdFzYKzPoDwoJJOWb3cXsvJ1L4zimjzwWLVevEZ1CLYGQp+J23iDC42q5ccpDTdSBThw1QUpSK6x }}
+        publish_dir: ./dist
