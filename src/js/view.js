@@ -20,7 +20,6 @@ export default class View {
         this.rootDiv.innerHTML = `<div>Нет данных</div>`;
     }
 
-
     drawItems(items) {
         const view = [];
         if (items && items.length) {
@@ -39,7 +38,6 @@ export default class View {
             this.rootDiv.innerHTML = view.join('');
         }
     }
-
 
     getCourseNoun(number) {
         const value = Math.abs(number) % 100; 
