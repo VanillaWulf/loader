@@ -19,4 +19,4 @@ deploy:
   repo: loader
   target-branch: main
   on:
-    branch: main
+    branch: gh-pages
