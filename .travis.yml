@@ -17,6 +17,6 @@ deploy:
   keep-history: true
   local-dir: dist
   repo: loader
-  target-branch: main
+  target-branch: gh-pages
   on:
-    branch: gh-pages
+    branch: main
