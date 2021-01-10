@@ -1,13 +1,13 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const miniCss = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: './src/js/index.js',
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist', 'js'),
+        path: path.resolve(__dirname, 'dist'),
         libraryExport: 'default'
     },
     module: {
