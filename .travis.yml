@@ -17,6 +17,6 @@ deploy:
   keep-history: true
   local-dir: dist
   repo: loader
-  target-branch: master
+  target-branch: main
   on:
-    branch: master
+    branch: main
